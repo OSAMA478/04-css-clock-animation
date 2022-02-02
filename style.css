@@ -1,0 +1,112 @@
+:root {
+	--sec: 60s;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+
+	background: #aaaaaa;
+
+	display: grid;
+	place-content: center;
+}
+
+.clock {
+	width: 400px;
+	height: 400px;
+
+	background: url(clock.png) #ffffff;
+	background-size: 100%;
+
+	border: 10px solid #000000;
+	border-radius: 50%;
+
+	position: relative;
+}
+
+.clock::after {
+	content: "";
+	width: 30px;
+	height: 30px;
+
+	background: #000000;
+
+	border-radius: 50%;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.hour {
+	width: 12px;
+	height: 35%;
+
+	background: rgb(0, 0, 0);
+
+	border-radius: 5px;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -100%) rotateZ(-60deg);
+
+	transform-origin: bottom;
+	animation: hour calc(12 * 60 * var(--sec)) linear infinite;
+}
+
+.min {
+	width: 8px;
+	height: 40%;
+
+	background: rgb(0, 0, 0);
+
+	border-radius: 2.5px;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -100%) rotateZ(60deg);
+
+	transform-origin: bottom;
+	animation: min calc(60 * var(--sec)) linear infinite;
+}
+
+.sec {
+	width: 5px;
+	height: 45%;
+
+	background: red;
+
+	border-radius: 2.5px;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -100%);
+
+	transform-origin: bottom;
+	animation: sec var(--sec) steps(60) infinite;
+}
+
+@keyframes sec {
+	to {
+		transform: translate(-50%, -100%) rotate(360deg) translateZ(100px);
+	}
+}
+@keyframes min {
+	to {
+		transform: translate(-50%, -100%) rotateZ(60deg) rotate(360deg);
+	}
+}
+@keyframes hour {
+	to {
+		transform: translate(-50%, -100%) rotateZ(-60deg) rotate(360deg);
+	}
+}
